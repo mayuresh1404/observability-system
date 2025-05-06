@@ -1,0 +1,55 @@
+{
+  "id": null,
+  "title": "Complete Observability Dashboard",
+  "tags": ["observability"],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "HTTP Requests Total",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "http_requests_total",
+          "legendFormat": "{{method}} {{endpoint}}",
+          "refId": "A"
+        }
+      ],
+      "xaxis": {
+        "mode": "time",
+        "show": true
+      },
+      "yaxis": {
+        "format": "short",
+        "show": true
+      },
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "logs",
+      "title": "App Logs (Loki)",
+      "datasource": "Loki",
+      "targets": [
+        {
+          "expr": "{job=\"varlogs\"}",
+          "refId": "B"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 8, "w": 24, "h": 8 }
+    },
+    {
+      "type": "trace",
+      "title": "Jaeger Traces",
+      "datasource": "Jaeger",
+      "targets": [
+        {
+          "refId": "C"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    }
+  ]
+}
